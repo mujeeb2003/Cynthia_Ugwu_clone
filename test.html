@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Loading-Animation</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Kristi&display=swap");
+        </style>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            body,
+            html {
+                width: 100%;
+                height: 100%;
+            }
+            #maindiv {
+                width: 100%;
+                height: 100vh;
+                position: relative;
+            }
+            #fs {
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .fsbounding {
+                display: flex;
+                height: 250px;
+                overflow: hidden;
+            }
+            .fsboundingelem {
+                font-size: 5rem;
+                font-family: "Kristi", cursive;
+                font-weight: bold;
+                display: flex;
+                transform: translateY(250px);
+            }
+            #elemsc {
+                width: 100%;
+                height: 0;
+                background-color: #808080;
+                position: absolute;
+                bottom: 0;
+            }
+            #main {
+                width: 100%;
+                height: 0;
+                background-color: black;
+                position: absolute;
+                bottom: 0;
+                /* overflow: hidden; */
+            }
+            #demo {
+                width: 100%;
+                display: none;
+                height: 100vh;
+                background-color: black;
+                color:white;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="maindiv">
+            <div id="fs">
+                <div class="fsbounding">
+                    <div class="fsboundingelem">
+                        <h1>Cynthia</h1>
+                    </div>
+                    <div class="fsboundingelem">
+                        <h1>Ugwu</h1>
+                    </div>
+                </div>
+            </div>
+            <div id="elemsc"></div>
+            <div id="main">
+                <div id="demo">
+                    <h1>Demo Div</h1>
+                </div>
+                <div id="demo">
+                    <h1>Demo Div</h1>
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script>
+            const tl = gsap.timeline();
+            tl.to(".fsboundingelem", {
+                y: 0,
+                duration: 0.5,
+                delay: 0.5,
+                ease: "Ease.easeIn",
+                stagger: 0.2,
+            })
+                .to(".fsboundingelem", {
+                    y: -250,
+                    duration: 0.5,
+                    delay: 0.5,
+                    ease: "Ease.easeIn",
+                    stagger: 0.2,
+                })
+
+                .to("#fs", {
+                    height: "0",
+                    duration: 1.5,
+                    delay: -0.5,
+                    ease: "Ease.easeInOut",
+                })
+                .to("#elemsc", {
+                    height: "100%",
+                    duration: 1.5,
+                    delay: -1.6,
+                    ease: "Ease.easeInOut",
+                })
+                .to("#main", {
+                    height: "100%",
+                    duration: 1.5,
+                    delay: -1,
+                    ease: "Power2.easeInOut",
+                })
+                .to(
+                    "#demo",
+                    {
+                        display: "block",
+                    },
+                    "<"
+                );
+        </script>
+    </body>
+</html>
