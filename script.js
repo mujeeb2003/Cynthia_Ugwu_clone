@@ -1,7 +1,7 @@
-const scroll = new LocomotiveScroll({
-    el: document.querySelector("#main"),
-    smooth: true,
-});
+// const scroll = new LocomotiveScroll({
+//     el: document.querySelector("#main"),
+//     smooth: true,
+// });
 
 var timeout;
 function mousechapta() {
@@ -10,6 +10,9 @@ function mousechapta() {
 
     var xprev = 0;
     var yprev = 0;
+
+    var xdiff = 0;
+    var ydiff = 0;
     window.addEventListener("mousemove", function (dets) {
         this.clearTimeout(timeout);
 

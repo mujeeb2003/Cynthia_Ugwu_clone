@@ -51,28 +51,6 @@ body {
     display: none;
 }
 
-.hero-watch-bg {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    right: -100px;
-    top: 50%;
-    transform: translateY(-50%) scale(0);
-    
-    opacity: 0.4;
-    background-image: url('./images/watch-silhouette.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    pointer-events: none;
-    z-index: 0;
-    /* animation: slowRotate 60s linear infinite; */
-}
-
-@keyframes slowRotate {
-    from { transform: translateY(-50%) rotate(0deg); }
-    to { transform: translateY(-50%) rotate(360deg); }
-}
-
 #hero #nav {
     display: flex;
     align-items: center;
@@ -91,7 +69,7 @@ body {
 #hero #heading h1 {
     font-size: 10vw;
     text-transform: uppercase;
-    opacity: 0.5;
+    opacity: 0.8;
     line-height: 1;
     letter-spacing: 0.3vw;
 }
@@ -198,24 +176,45 @@ body {
 
 #about {
     color: white;
-    /* display: flex; */
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 80px;
     width: 100%;
+    padding: 10vw 8vw;
     background-color: black;
-    padding: 15vw 8vw;
-    padding-left: 24vw;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2vw;
 }
-#about img {
-    width: 300px;
-    border-radius: 10px;
+
+#about video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 0;
 }
+#about:has(#textabout:hover) video {
+    opacity: 1;
+}
+
 #textabout {
     width: 50%;
     color: white;
-    margin-top: 3vw;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 3vw;
+    border-radius: 15px;
+    z-index: 1;
+    transition: background-color 0.5s ease;
+}
+
+#about:hover #textabout {
+    background-color: rgba(0, 0, 0, 0.3);
 }
 #textabout h5 {
     font-size: 15px;
@@ -300,5 +299,45 @@ body {
     }
     to {
         transform: translateY(0%);
+    }
+}
+/* 
+.color-reveal {
+    background: linear-gradient(90deg, #c2a152, #c2a052ae, #c2a152);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: color-move 10s linear infinite;
+}
+
+@keyframes color-move {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+} */
+
+.loading-dial {
+    height: 4rem;
+    vertical-align: middle;
+    margin: 0 0.2rem;
+    animation: spin 5s linear infinite;
+}
+.heading-dial {
+    height: 6rem;
+    /* vertical-align: middle; */
+    margin: 0 0.2rem;
+    /* animation: spin 5s linear infinite; */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
