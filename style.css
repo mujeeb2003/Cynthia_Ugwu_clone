@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /* font-family: "General Sans"; */
+    font-family: "General Sans";
 }
 
 body {
@@ -50,6 +50,28 @@ body {
     position: relative;
     display: none;
 }
+
+.hero-watch-bg {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+    background-image: url('./images/watch-silhouette.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+    /* animation: slowRotate 60s linear infinite; */
+}
+
+@keyframes slowRotate {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
 #hero #nav {
     display: flex;
     align-items: center;
@@ -186,7 +208,8 @@ body {
     padding-left: 24vw;
 }
 #about img {
-    width: 230px;
+    width: 300px;
+    border-radius: 10px;
 }
 #textabout {
     width: 50%;
