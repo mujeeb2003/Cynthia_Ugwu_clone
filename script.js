@@ -100,6 +100,11 @@ function firstPageAnim() {
             duration: 0.75,
             stagger: 0.25,
         })
+        .to(".hero-watch-bg",{
+            scale: 1,
+            duration: 1,
+            ease: "Power3.easeOut",
+        })
         .from("#herofooter", {
             y: -10,
             duration: 1,

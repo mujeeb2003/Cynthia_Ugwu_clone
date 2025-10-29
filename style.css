@@ -57,7 +57,8 @@ body {
     height: 600px;
     right: -100px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(0);
+    
     opacity: 0.5;
     background-image: url('./images/watch-silhouette.png');
     background-size: contain;
