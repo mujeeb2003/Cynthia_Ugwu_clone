@@ -58,7 +58,6 @@ function firstPageAnim() {
             ease: "Ease.easeIn",
             stagger: 0.2,
         })
-
         .to("#fs", {
             height: "0",
             duration: 1.5,
@@ -103,10 +102,10 @@ function firstPageAnim() {
             duration: 0.75,
             stagger: 0.25,
         })
-        .to(".hero-watch-bg",{
-            scale: 1,
+        .from(".hero-watch-img",{
+            opacity: 0,
             duration: 1,
-            ease: "Power3.easeOut",
+            ease: "Ease.easeInOut",
         })
         .from("#herofooter", {
             y: -10,

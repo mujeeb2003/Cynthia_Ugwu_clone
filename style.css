@@ -49,13 +49,63 @@ body {
     color: #fff;
     position: relative;
     display: none;
+    overflow: hidden;
+    background-image: url(image.png);
+    background-size: cover;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+
 }
 
+.hero-watches-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 0;
+}
+
+.watch-panel {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* .watch-panel-1 {
+    background-color: #D4AF37;
+}
+
+.watch-panel-2 {
+    background-color: #1a2332;
+}
+
+.watch-panel-3 {
+    background-color: #6B1C23;
+} */
+
+.hero-watch-img {
+    width: 70%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+.watch-img-one {
+    transform: rotateY(180deg);
+}
 #hero #nav {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: 2.5vw 2.8vw;
+    position: relative;
+    z-index: 10;
 }
 #hero #nav h3 {
     font-size: 1vw;
@@ -76,6 +126,8 @@ body {
 #hero #heading {
     padding: 2vw 2.8vw;
     margin-top: 2vw;
+    position: relative;
+    z-index: 10;
 }
 #hero #heading .boxheading {
     padding-left: 120px;
@@ -83,17 +135,6 @@ body {
 }
 .boxheading h5 {
     text-align: right;
-    text-transform: uppercase;
-}
-
-#smheading {
-    margin-top: 7vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    padding: 0 2.8vw;
-    font-size: 1.4vw;
     text-transform: uppercase;
 }
 
@@ -105,6 +146,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0.5vw 2.8vw;
+    z-index: 10;
 }
 
 #herofooter a {
@@ -325,12 +367,6 @@ body {
     vertical-align: middle;
     margin: 0 0.2rem;
     animation: spin 5s linear infinite;
-}
-.heading-dial {
-    height: 6rem;
-    /* vertical-align: middle; */
-    margin: 0 0.2rem;
-    /* animation: spin 5s linear infinite; */
 }
 
 @keyframes spin {
