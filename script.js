@@ -1,7 +1,16 @@
+// ============================================
+// LOCOMOTIVE SCROLL - DISABLED FOR PARALLAX HERO
+// (Conflicts with ScrollTrigger scrubbing)
+// ============================================
 // const scroll = new LocomotiveScroll({
 //     el: document.querySelector("#main"),
 //     smooth: true,
 // });
+
+// ============================================
+// GSAP SCROLLTRIGGER REGISTRATION
+// ============================================
+gsap.registerPlugin(ScrollTrigger);
 
 var timeout;
 function mousechapta() {
@@ -76,7 +85,8 @@ function firstPageAnim() {
             delay: -1.1,
             ease: "Power2.easeInOut",
         })
-        .to("#hero", {
+        // Show NEW parallax hero instead of old hero
+        .to(".hero-parallax", {
             display: "block"
         },"<")
         .to("#second", {
@@ -91,34 +101,38 @@ function firstPageAnim() {
         .to("#footer", {
             display: "flex"
         },"<")
-        .from("#nav", {
-            y: -10,
+        // Animate parallax hero elements in
+        .from(".hero-text #nav", {
+            y: -20,
             duration: 0.5,
             opacity: 0,
             delay: 0.5,
         })
-        .to(".boundingelem", {
-            y: 0,
-            duration: 0.75,
-            stagger: 0.25,
-        })
-        .from(".hero-watch-img",{
-            opacity: 0,
-            duration: 1,
-            ease: "Ease.easeInOut",
-        })
-        .from("#herofooter", {
-            y: -10,
+        .from(".hero-headline", {
+            y: 100,
             duration: 1,
             opacity: 0,
-            delay: -0.5,
+            ease: "power3.out"
+        })
+        .from(".cta-button", {
+            y: 30,
+            duration: 0.8,
+            opacity: 1,
+            ease: "power2.out"
+        })
+        .from(".hero-watch", {
+            x: 200,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out"
+        }, "-=0.8")
+        .call(() => {
+            // Refresh ScrollTrigger after all animations complete
+            ScrollTrigger.refresh();
         });
 }
 
-firstPageAnim();
-mousefollower();
-mousechapta();
-
+// Old hero image hover effects for #second section
 document.querySelectorAll(".elem").forEach(function (elem) {
     var rotate = 0;
     var diffrot = 0;
@@ -155,3 +169,45 @@ document.querySelectorAll(".elem").forEach(function (elem) {
         });
     });
 });
+
+// ============================================
+// PARALLAX HERO SCROLLTRIGGER ANIMATION
+// ============================================
+function initParallaxHero() {
+    // Wait for DOM and first page animation
+    setTimeout(() => {
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: ".hero-parallax",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1, // Smooth scrubbing with slight delay (1 second)
+                scroller: "#main", // CRITICAL: Tell ScrollTrigger to watch #main container
+                // markers: true // Uncomment for debugging
+            }
+        })
+        // Watch moves fastest (creates foreground effect)
+        .to(".hero-watch", {
+            y: -300,
+            ease: "none"
+        }, 0)
+        
+        // Text moves slower (mid-ground)
+        .to(".hero-text", {
+            y: -150,
+            ease: "none"
+        }, 0)
+        
+        // Background scales slightly (depth effect)
+        .to(".hero-background", {
+            scale: 1.15,
+            ease: "none"
+        }, 0);
+    }, 3500); // Wait for loading animation to complete
+}
+
+// Initialize everything
+firstPageAnim();
+mousefollower();
+mousechapta();
+initParallaxHero();

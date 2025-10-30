@@ -34,6 +34,7 @@ body {
     bottom:0;
     background-color: black;
     overflow-x: hidden;
+    overflow-y: auto; /* CRITICAL: Enable vertical scrolling */
     scrollbar-color: black black;
 }
 
@@ -375,5 +376,140 @@ body {
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   PARALLAX HERO SECTION - 3 LAYER SYSTEM
+   ============================================ */
+
+.underline {
+    position: relative;
+    display: inline-block;
+}
+
+.underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+}
+
+.hero-parallax {
+    position: relative;
+    width: 100%;
+    height: 120vh; /* CRITICAL: 2x viewport height creates scroll distance */
+    overflow: hidden;
+    display: none; /* Will be shown via GSAP animation */
+}
+
+/* Layer 1: Dark Background (Furthest Back - z-index: 1) */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/herobg-hd.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+/* Layer 2: Text Content (Mid-ground - z-index: 2) */
+.hero-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 10%;
+    z-index: 2;
+    color: white;
+}
+
+.hero-text #nav {
+    position: absolute;
+    top: 2.5vw;
+    right: 2.8vw;
+    left: auto;
+    padding: 0;
+}
+
+.hero-text #nav h3 {
+    font-size: 1vw;
+    color: white;
+}
+
+.hero-headline {
+    font-size: 5.5vw;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 10vw;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    max-width: 50%;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1.2vw 2.5vw;
+    font-size: 1.1vw;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: white;
+    border: 2px solid white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.cta-button:hover {
+    background: white;
+    color: black;
+    transform: translateY(-2px);
+}
+
+/* Layer 3: Watch Image (Foreground - z-index: 3) */
+.hero-watch {
+    position: absolute;
+    top: 15vh;
+    right: 5vw;
+    width: 45%;
+    height: auto;
+    object-fit: contain;
+    z-index: 3;
+    filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.5));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-headline {
+        font-size: 8vw;
+        max-width: 80%;
+    }
+    
+    .cta-button {
+        padding: 3vw 5vw;
+        font-size: 2.5vw;
+    }
+    
+    .hero-watch {
+        width: 70%;
+        top: 50vh;
+        right: 50%;
+        transform: translateX(50%);
+    }
+    
+    .hero-text {
+        padding-left: 5%;
     }
 }
