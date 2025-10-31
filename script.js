@@ -114,18 +114,24 @@ function firstPageAnim() {
             opacity: 0,
             ease: "power3.out"
         })
-        .from(".cta-button", {
-            y: 30,
+        .to(".cta-button", {
+            y: 0,
             duration: 0.8,
             opacity: 1,
             ease: "power2.out"
         })
-        .from(".hero-watch", {
-            x: 200,
+        .from(".hero-watch-carousel", {
             opacity: 0,
+            scale: 0.8,
             duration: 1.2,
             ease: "power3.out"
         }, "-=0.8")
+        .from(".carousel-indicators", {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            ease: "power2.out"
+        }, "-=0.5")
         .call(() => {
             // Refresh ScrollTrigger after all animations complete
             ScrollTrigger.refresh();
@@ -186,9 +192,9 @@ function initParallaxHero() {
                 // markers: true // Uncomment for debugging
             }
         })
-        // Watch moves fastest (creates foreground effect)
-        .to(".hero-watch", {
-            y: -300,
+        // Watch carousel moves fastest (creates foreground effect)
+        .to(".hero-watch-carousel", {
+            y: -800,
             ease: "none"
         }, 0)
         
@@ -202,8 +208,207 @@ function initParallaxHero() {
         .to(".hero-background", {
             scale: 1.15,
             ease: "none"
+        }, 0)
+        
+        // Indicators move with carousel
+        .to(".carousel-indicators", {
+            y: -800,
+            ease: "none"
         }, 0);
     }, 3500); // Wait for loading animation to complete
+}
+
+// ============================================
+// 3D STACKED WATCH CAROUSEL SYSTEM
+// ============================================
+let currentSlide = 0;
+let autoPlayInterval;
+let isCarouselPaused = false;
+
+function initWatchCarousel() {
+    const watches = document.querySelectorAll('.hero-watch');
+    const indicators = document.querySelectorAll('.indicator');
+    const carousel = document.querySelector('.hero-watch-carousel');
+    
+    if (!watches.length || watches.length < 3) return;
+    
+    // Calculate positions for circular carousel
+    function getPosition(index, current) {
+        const total = watches.length;
+        let diff = index - current;
+        
+        // Wrap around for circular behavior
+        if (diff < -1) diff += total;
+        if (diff > 1) diff -= total;
+        
+        if (diff === -1) return 'left';
+        if (diff === 0) return 'center';
+        if (diff === 1) return 'right';
+        return 'hidden';
+    }
+    
+    // Update all watch positions
+    function updatePositions(newIndex, animate = true) {
+        // Get the container width to calculate positions
+        const container = document.querySelector('.hero-watch-carousel');
+        const containerWidth = container ? container.offsetWidth : 0;
+        const spacing = containerWidth * 0.3; // 30% of container width
+        
+        watches.forEach((watch, index) => {
+            const position = getPosition(index, newIndex);
+            const oldPosition = watch.getAttribute('data-position');
+            
+            watch.setAttribute('data-position', position);
+            
+            // Define transforms for each position
+            const transforms = {
+                'left': { 
+                    xPercent: -50,
+                    yPercent: -50,
+                    x: -spacing,
+                    y: 0,
+                    scale: 0.65, 
+                    rotateY: 25, 
+                    opacity: 0.3,
+                    filter: 'drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3)) blur(1px)',
+                    zIndex: 1
+                },
+                'center': { 
+                    xPercent: -50,
+                    yPercent: -50,
+                    x: 0,
+                    y: 0,
+                    scale: 1, 
+                    rotateY: 0, 
+                    opacity: 1,
+                    filter: 'drop-shadow(0 30px 80px rgba(0, 0, 0, 0.6))',
+                    zIndex: 3
+                },
+                'right': { 
+                    xPercent: -50,
+                    yPercent: -50,
+                    x: spacing,
+                    y: 0,
+                    scale: 0.65, 
+                    rotateY: -25, 
+                    opacity: 0.3,
+                    filter: 'drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3)) blur(1px)',
+                    zIndex: 1
+                },
+                'hidden': { 
+                    xPercent: -50,
+                    yPercent: -50,
+                    x: position === 'left' ? -spacing * 2 : spacing * 2,
+                    y: 0,
+                    scale: 0.5, 
+                    opacity: 0,
+                    zIndex: 0
+                }
+            };
+            
+            const target = transforms[position];
+            
+            // Apply transforms - either animated or instant
+            if (animate && oldPosition !== position) {
+                gsap.to(watch, {
+                    xPercent: target.xPercent,
+                    yPercent: target.yPercent,
+                    x: target.x,
+                    y: target.y,
+                    scale: target.scale,
+                    rotateY: target.rotateY,
+                    opacity: target.opacity,
+                    filter: target.filter || 'none',
+                    zIndex: target.zIndex,
+                    duration: 1,
+                    ease: "power3.inOut"
+                });
+            } else if (!animate) {
+                // Set initial position instantly (no animation)
+                gsap.set(watch, {
+                    xPercent: target.xPercent,
+                    yPercent: target.yPercent,
+                    x: target.x,
+                    y: target.y,
+                    scale: target.scale,
+                    rotateY: target.rotateY,
+                    opacity: target.opacity,
+                    filter: target.filter || 'none',
+                    zIndex: target.zIndex
+                });
+            }
+        });
+    }
+    
+    // Initialize positions
+    updatePositions(currentSlide, false);
+    
+    // Go to specific slide
+    function goToSlide(slideIndex) {
+        if (slideIndex < 0) slideIndex = watches.length - 1;
+        if (slideIndex >= watches.length) slideIndex = 0;
+        
+        // Update indicators
+        indicators[currentSlide].classList.remove('active');
+        indicators[slideIndex].classList.add('active');
+        
+        currentSlide = slideIndex;
+        updatePositions(currentSlide, true);
+    }
+    
+    // Auto-play functionality
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            if (!isCarouselPaused) {
+                goToSlide(currentSlide + 1);
+            }
+        }, 5000); // Change every 5 seconds
+    }
+    
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+    
+    // Pause on hover
+    if (carousel) {
+        carousel.addEventListener('mouseenter', () => {
+            isCarouselPaused = true;
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            isCarouselPaused = false;
+        });
+    }
+    
+    // Manual control via indicators
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            stopAutoPlay();
+            goToSlide(index);
+            startAutoPlay(); // Restart auto-play after manual interaction
+        });
+    });
+    
+    // Click on side watches to navigate
+    watches.forEach((watch, index) => {
+        watch.addEventListener('click', () => {
+            const position = watch.getAttribute('data-position');
+            if (position === 'left') {
+                stopAutoPlay();
+                goToSlide(currentSlide - 1);
+                startAutoPlay();
+            } else if (position === 'right') {
+                stopAutoPlay();
+                goToSlide(currentSlide + 1);
+                startAutoPlay();
+            }
+        });
+    });
+    
+    // Start auto-play after initial load
+    setTimeout(() => {
+        startAutoPlay();
+    }, 4000); // Start after hero animation completes
 }
 
 // Initialize everything
@@ -211,3 +416,4 @@ firstPageAnim();
 mousefollower();
 mousechapta();
 initParallaxHero();
+initWatchCarousel();
