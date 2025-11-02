@@ -19,6 +19,7 @@ body {
     position: absolute;
     transition: all cubic-bezier(0.19, 1, 0.22, 1) 1s;
     z-index: 999;
+    display: none;
 }
 
 #maindiv {
@@ -452,9 +453,9 @@ body {
     font-size: 5.5vw;
     font-weight: 700;
     line-height: 1.1;
-    margin-bottom: 10vw;
+    margin-bottom: 7vw;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    /* letter-spacing: 0.02em; */
     max-width: 50%;
     opacity: 0.9;
 }

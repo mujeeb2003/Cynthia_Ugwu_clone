@@ -108,12 +108,12 @@ function firstPageAnim() {
             opacity: 0,
             delay: 0.5,
         })
-        .from(".hero-headline", {
-            y: 100,
-            duration: 1,
-            opacity: 0,
-            ease: "power3.out"
-        })
+        // .from(".hero-headline", {
+        //     y: 100,
+        //     duration: 1,
+        //     opacity: 0,
+        //     ease: "power3.out"
+        // })
         .to(".cta-button", {
             y: 0,
             duration: 0.8,
@@ -206,7 +206,7 @@ function initParallaxHero() {
         
         // Background scales slightly (depth effect)
         .to(".hero-background", {
-            scale: 1.15,
+            scale: 1.55,
             ease: "none"
         }, 0)
         
@@ -413,7 +413,20 @@ function initWatchCarousel() {
 
 // Initialize everything
 firstPageAnim();
-mousefollower();
-mousechapta();
+// mousefollower();
+// mousechapta();
 initParallaxHero();
 initWatchCarousel();
+
+Shery.mouseFollower();
+Shery.makeMagnet(".magnet",{
+    ease: "Power2.easeOut",
+});
+Shery.textAnimate(".hero-headline" /* Element to target.*/, {
+  style: 1,
+  y: 50,
+  delay: 0.15,
+//   duration: 2,
+  ease: "Ease.easeInOut",
+  multiplier: 1,
+});
