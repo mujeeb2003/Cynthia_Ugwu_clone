@@ -51,6 +51,99 @@ function mousefollower(xscale, yscale) {
     });
 }
 
+// ============================================
+// TYPING EFFECT WITH GRADIENT ANIMATION
+// ============================================
+function initTypingEffect() {
+    const headline = document.querySelector('.hero-headline');
+    if (!headline) return;
+    
+    const text = headline.getAttribute('data-text');
+    headline.textContent = ''; // Clear existing text
+    
+    // Split text into words to identify last two words
+    const words = text.split(' ');
+    const lastTwoWords = words.slice(-2).join(' ');
+    
+    // Split text into characters, preserving spaces and adding line break
+    const lines = text.split('. ');
+    const line1 = lines[0] + '.';
+    const line2 = lines[1];
+    
+    // Wrap each character in a span
+    const chars = [];
+    let charIndex = 0;
+    
+    // First line
+    for (let i = 0; i < line1.length; i++) {
+        const char = line1[i];
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.setAttribute('data-index', charIndex++);
+        headline.appendChild(span);
+        chars.push(span);
+    }
+    
+    // Line break
+    headline.appendChild(document.createElement('br'));
+    
+    // Second line - mark last two words as gold
+    const line2Start = text.indexOf(line2);
+    const lastTwoWordsStart = text.indexOf(lastTwoWords);
+    
+    for (let i = 0; i < line2.length; i++) {
+        const char = line2[i];
+        const span = document.createElement('span');
+        span.className = 'char';
+        
+        // Check if this character is part of last two words
+        const absoluteIndex = line2Start + i;
+        if (absoluteIndex >= lastTwoWordsStart) {
+            span.classList.add('gold');
+        }
+        
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.setAttribute('data-index', charIndex++);
+        headline.appendChild(span);
+        chars.push(span);
+    }
+    
+    // Typing animation with GSAP
+    const tl = gsap.timeline({
+        onComplete: () => {
+            // After typing completes, trigger gradient sweep
+            headline.classList.add('gradient-active');
+            
+            // Sweep gradient across each character sequentially
+            chars.forEach((char, index) => {
+                setTimeout(() => {
+                    char.classList.add('sweeping');
+                    
+                }, index * 30); // 30ms delay between each character
+                // After sweep completes, mark as complete
+                if (index == chars.length - 1) {
+                    setTimeout(() => {
+                        headline.classList.add('sweep-complete');
+                    }, 600);
+                }
+            });
+        }
+    });
+    
+    // Animate each character appearing
+    chars.forEach((char, index) => {
+        tl.to(char, {
+            opacity: 1,
+            y: 0,
+            duration: 0.05,
+            ease: "power1.out"
+        }, index * 0.03);
+    });
+    
+    return tl;
+}
+
 function firstPageAnim() {
     var tl = gsap.timeline();
     tl.to(".fsboundingelem", {
@@ -108,12 +201,10 @@ function firstPageAnim() {
             opacity: 0,
             delay: 0.5,
         })
-        // .from(".hero-headline", {
-        //     y: 100,
-        //     duration: 1,
-        //     opacity: 0,
-        //     ease: "power3.out"
-        // })
+        // Typing effect will be called separately
+        .call(() => {
+            initTypingEffect();
+        })
         .to(".cta-button", {
             y: 0,
             duration: 0.8,
@@ -421,12 +512,4 @@ initWatchCarousel();
 Shery.mouseFollower();
 Shery.makeMagnet(".magnet",{
     ease: "Power2.easeOut",
-});
-Shery.textAnimate(".hero-headline" /* Element to target.*/, {
-  style: 1,
-  y: 50,
-  delay: 0.15,
-//   duration: 2,
-  ease: "Ease.easeInOut",
-  multiplier: 1,
 });

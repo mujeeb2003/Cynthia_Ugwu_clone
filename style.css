@@ -456,8 +456,47 @@ body {
     margin-bottom: 7vw;
     text-transform: uppercase;
     /* letter-spacing: 0.02em; */
-    max-width: 50%;
-    opacity: 0.9;
+    max-width: 47%;
+    opacity: 1;
+    color: white;
+    position: relative;
+}
+
+/* Individual characters for typing effect */
+.hero-headline .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: color 0.3s ease;
+}
+
+/* Characters that will stay golden (last two words) */
+.hero-headline .char.gold {
+    color: #d4af37;
+}
+
+/* Gradient sweep effect on individual characters */
+.hero-headline.gradient-active .char.sweeping {
+    animation: charGlow 0.6s ease-out forwards;
+}
+
+@keyframes charGlow {
+    0% {
+        color: white;
+    }
+    50% {
+        color: #f0d78c;
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+    }
+    100% {
+        color: white;
+    }
+}
+
+/* Last two words stay golden */
+.hero-headline.sweep-complete .char.gold {
+    color: #d4af37;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .cta-button {
