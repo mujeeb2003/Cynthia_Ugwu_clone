@@ -460,46 +460,47 @@ function initWatchCarousel() {
         clearInterval(autoPlayInterval);
     }
     
-    // Pause on hover
-    if (carousel) {
-        carousel.addEventListener('mouseenter', () => {
-            isCarouselPaused = true;
-        });
+    // // Pause on hover
+    // if (carousel) {
+    //     carousel.addEventListener('mouseenter', () => {
+    //         isCarouselPaused = true;
+    //     });
         
-        carousel.addEventListener('mouseleave', () => {
-            isCarouselPaused = false;
-        });
-    }
+    //     carousel.addEventListener('mouseleave', () => {
+    //         isCarouselPaused = false;
+    //     });
+    // }
     
-    // Manual control via indicators
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            stopAutoPlay();
-            goToSlide(index);
-            startAutoPlay(); // Restart auto-play after manual interaction
-        });
-    });
+    // // Manual control via indicators
+    // indicators.forEach((indicator, index) => {
+    //     indicator.addEventListener('click', () => {
+    //         stopAutoPlay();
+    //         goToSlide(index);
+    //         startAutoPlay(); // Restart auto-play after manual interaction
+    //     });
+    // });
     
-    // Click on side watches to navigate
-    watches.forEach((watch, index) => {
-        watch.addEventListener('click', () => {
-            const position = watch.getAttribute('data-position');
-            if (position === 'left') {
-                stopAutoPlay();
-                goToSlide(currentSlide - 1);
-                startAutoPlay();
-            } else if (position === 'right') {
-                stopAutoPlay();
-                goToSlide(currentSlide + 1);
-                startAutoPlay();
-            }
-        });
-    });
+    // // Click on side watches to navigate
+    // watches.forEach((watch, index) => {
+    //     watch.addEventListener('click', () => {
+    //         const position = watch.getAttribute('data-position');
+    //         if (position === 'left') {
+    //             stopAutoPlay();
+    //             goToSlide(currentSlide - 1);
+    //             startAutoPlay();
+    //         } else if (position === 'right') {
+    //             stopAutoPlay();
+    //             goToSlide(currentSlide + 1);
+    //             startAutoPlay();
+    //         }
+    //     });
+    // });
     
-    // Start auto-play after initial load
-    setTimeout(() => {
-        startAutoPlay();
-    }, 4000); // Start after hero animation completes
+    // // Start auto-play after initial load
+    // setTimeout(() => {
+    //     startAutoPlay();
+    // }, 4000); // Start after hero animation completes
+    startAutoPlay();
 }
 
 // Initialize everything
