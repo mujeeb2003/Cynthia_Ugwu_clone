@@ -1,0 +1,78 @@
+{
+  "en": {
+    "nav": {
+      "menu": "MENU+"
+    },
+    "hero": {
+      "headline": "The Weight of Heritage. The Form of Now.",
+      "cta": "Explore Our Icons"
+    },
+    "collections": {
+      "chrono": "Chrono Master",
+      "chronoYear": "2025",
+      "royal": "Royal Heritage",
+      "royalYear": "2025",
+      "midnight": "Midnight Black",
+      "midnightYear": "2024"
+    },
+    "about": {
+      "title": "(Our Philosophy)",
+      "text": "Time is the ultimate luxury. Each timepiece is a legacy, meticulously crafted to transcend generations.",
+      "cta": "Explore Collection"
+    },
+    "subscribe": {
+      "title": "(Stay Connected)",
+      "text": "Join our exclusive collectors community"
+    },
+    "footer": {
+      "copyright": "2025 ©",
+      "made": "SWISS MADE",
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "whatsapp": "WhatsApp"
+    },
+    "loading": {
+      "brand1": "Chronos",
+      "brand2": "Luxury"
+    }
+  },
+  "ar": {
+    "nav": {
+      "menu": "القائمة+"
+    },
+    "hero": {
+      "headline": "ثقل التراث. شكل الحاضر.",
+      "cta": "استكشف رموزنا"
+    },
+    "collections": {
+      "chrono": "كرونو ماستر",
+      "chronoYear": "٢٠٢٥",
+      "royal": "التراث الملكي",
+      "royalYear": "٢٠٢٥",
+      "midnight": "أسود منتصف الليل",
+      "midnightYear": "٢٠٢٤"
+    },
+    "about": {
+      "title": "(فلسفتنا)",
+      "text": "الوقت هو الرفاهية المطلقة. كل ساعة هي إرث، مصنوعة بدقة متناهية لتتجاوز الأجيال.",
+      "cta": "استكشف المجموعة"
+    },
+    "subscribe": {
+      "title": "(ابق على اتصال)",
+      "text": "انضم إلى مجتمع هواة الجمع الحصري لدينا"
+    },
+    "footer": {
+      "copyright": "© 2025",
+      "made": "صنع في سويسرا",
+      "instagram": "إنستغرام",
+      "youtube": "يوتيوب",
+      "facebook": "فيسبوك",
+      "whatsapp": "واتساب"
+    },
+    "loading": {
+      "brand1": "كرونوس",
+      "brand2": "الفخامة"
+    }
+  }
+}

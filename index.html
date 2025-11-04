@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,7 @@
         />
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Kristi&display=swap");
-        </style>
+            </style>
         <link
             href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
             rel="stylesheet"
@@ -48,15 +48,21 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">عربي</button>
+        </div>
+        
         <div id="minicircle"></div>
         <div id="maindiv">
             <div id="fs">
                 <div class="fsbounding">
                     <div class="fsboundingelem">
-                        <h1>Chr<img class="loading-dial" src="./images/watch-dial.png" alt="o">nos</h1>
+                        <h1 data-i18n="loading.brand1">Chronos</h1>
                     </div>
                     <div class="fsboundingelem">
-                        <h1>Luxury</h1>
+                        <h1 data-i18n="loading.brand2">Luxury</h1>
                     </div>
                 </div>
             </div>
@@ -71,10 +77,10 @@
                     <!-- Layer 2: Text Content (Mid-ground) -->
                     <div class="hero-text">
                         <div id="nav">
-                            <h3 class="underline">MENU+</h3>
+                            <h3 class="underline" data-i18n="nav.menu">MENU+</h3>
                         </div>
-                        <h1 class="hero-headline" data-text="The Weight of Heritage. The Form of Now."></h1>
-                        <a href="#" class="cta-button magnet">Explore Our Icons</a>
+                        <h1 class="hero-headline" data-text="The Weight of Heritage. The Form of Now." data-i18n="hero.headline"></h1>
+                        <a href="#" class="cta-button magnet" data-i18n="hero.cta">Explore Our Icons</a>
                     </div>
                     
                     <!-- Layer 3: Watch Carousel (Foreground) -->
@@ -144,18 +150,18 @@
                 <div id="second">
                     <div class="elem">
                         <img src="./images/chrono-master.png" alt="" />
-                        <h1>Chrono Master</h1>
-                        <h5>2025</h5>
+                        <h1 data-i18n="collections.chrono">Chrono Master</h1>
+                        <h5 data-i18n="collections.chronoYear">2025</h5>
                     </div>
                     <div class="elem">
                         <img src="./images/royal-heritage.png" alt="" />
-                        <h1>Royal Heritage</h1>
-                        <h5>2025</h5>
+                        <h1 data-i18n="collections.royal">Royal Heritage</h1>
+                        <h5 data-i18n="collections.royalYear">2025</h5>
                     </div>
                     <div class="elem">
                         <img src="./images/midnight-black.png" alt="" />
-                        <h1>Midnight Black</h1>
-                        <h5>2024</h5>
+                        <h1 data-i18n="collections.midnight">Midnight Black</h1>
+                        <h5 data-i18n="collections.midnightYear">2024</h5>
                     </div>
                 </div>
 
@@ -167,33 +173,33 @@
                         src="./images/Watchmaker_s_Workbench_Cinematic_Video_Watermark.mp4"
                     ></video>
                     <div id="textabout">
-                        <h5>(Our Philosophy)</h5>
-                        <h3>
+                        <h5 data-i18n="about.title">(Our Philosophy)</h5>
+                        <h3 data-i18n="about.text">
                             Time is the ultimate luxury. Each timepiece is a
                             legacy, meticulously crafted to transcend
                             generations.
                         </h3>
-                        <a href="#">Explore Collection</a>
+                        <a href="#" data-i18n="about.cta">Explore Collection</a>
                     </div>
                 </div>
 
                 <div id="subscribe">
-                    <h5>(Stay Connected)</h5>
+                    <h5 data-i18n="subscribe.title">(Stay Connected)</h5>
                     <h3>
-                        Join our exclusive collectors community
+                        <span data-i18n="subscribe.text">Join our exclusive collectors community</span>
                         <i class="ri-arrow-right-up-line"></i>
                     </h3>
                 </div>
 
                 <div id="footer">
                     <div id="fleft">
-                        <h1>2025 &copy;</h1>
-                        <h1>SWISS MADE</h1>
+                        <h1 data-i18n="footer.copyright">2025 ©</h1>
+                        <h1 data-i18n="footer.made">SWISS MADE</h1>
                     </div>
 
                     <div id="fright">
-                        <a href="#">Instagram</a><a href="#">YouTube</a
-                        ><a href="#">Facebook</a><a href="#">WhatsApp</a>
+                        <a href="#" data-i18n="footer.instagram">Instagram</a><a href="#" data-i18n="footer.youtube">YouTube</a
+                        ><a href="#" data-i18n="footer.facebook">Facebook</a><a href="#" data-i18n="footer.whatsapp">WhatsApp</a>
                     </div>
                 </div>
             </div>
