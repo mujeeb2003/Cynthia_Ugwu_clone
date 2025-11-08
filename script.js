@@ -242,7 +242,7 @@ function initTypingEffect() {
                 setTimeout(() => {
                     element.classList.add('sweeping');
                     
-                }, index * (isRTL ? 80 : 30)); // Slower for words, faster for chars
+                }, index * (isRTL ? 100 : 30)); // Slower for words, faster for chars
                 // After sweep completes, mark as complete
                 if (index == elements.length - 1) {
                     setTimeout(() => {
@@ -254,7 +254,7 @@ function initTypingEffect() {
     });
     
     // Animate each element appearing
-    const animationDelay = isRTL ? 0.08 : 0.03; // Slower for words in Arabic
+    const animationDelay = isRTL ? 0.15 : 0.03; // Slower for words in Arabic
     elements.forEach((element, index) => {
         tl.to(element, {
             opacity: 1,
@@ -577,7 +577,7 @@ function initWatchCarousel() {
             if (!isCarouselPaused) {
                 goToSlide(currentSlide + 1);
             }
-        }, 5000); // Change every 5 seconds
+        }, 2000); // Change every 5 seconds
     }
     
     function stopAutoPlay() {
@@ -605,20 +605,20 @@ function initWatchCarousel() {
     // });
     
     // // Click on side watches to navigate
-    // watches.forEach((watch, index) => {
-    //     watch.addEventListener('click', () => {
-    //         const position = watch.getAttribute('data-position');
-    //         if (position === 'left') {
-    //             stopAutoPlay();
-    //             goToSlide(currentSlide - 1);
-    //             startAutoPlay();
-    //         } else if (position === 'right') {
-    //             stopAutoPlay();
-    //             goToSlide(currentSlide + 1);
-    //             startAutoPlay();
-    //         }
-    //     });
-    // });
+    watches.forEach((watch, index) => {
+        watch.addEventListener('click', () => {
+            const position = watch.getAttribute('data-position');
+            if (position === 'left') {
+                stopAutoPlay();
+                goToSlide(currentSlide - 1);
+                startAutoPlay();
+            } else if (position === 'right') {
+                stopAutoPlay();
+                goToSlide(currentSlide + 1);
+                startAutoPlay();
+            }
+        });
+    });
     
     // // Start auto-play after initial load
     // setTimeout(() => {
